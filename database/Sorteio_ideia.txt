@@ -1,0 +1,46 @@
+Sorteio {
+Id,
+Descricao,
+Premio,
+ValorPremio,
+DataCadastro,
+DataAlteracao,
+Ativo
+}
+
+Participante {
+
+Id,
+Nome,
+Endereço,
+Cep,
+Estado,
+Cidade,
+Email,
+Telefone,
+CPF,
+DataCadastro,
+DataAlteracao,
+Ativo
+
+}
+
+TicketSorteio {
+Id,
+IdParticipante,
+IdSorteio
+Numero,
+DataCadastro,
+DataAlteracao,
+Ativo
+}
+
+SorteioHistorico{
+Id,
+IdTicketSorteio,
+Descricao,
+DataCadastro,
+Ativo
+}
+
+
