@@ -12,9 +12,5 @@ namespace Sorteio.Business.Interfaces.Services
     public interface ITicketSorteioService : IService<TicketSorteio>
     {
 
-        Task Adicionar(TicketSorteio ticketSorteio);
-        Task Atualizar(TicketSorteio ticketSorteio);
-        Task Remover(Guid id);
-
     }
 }

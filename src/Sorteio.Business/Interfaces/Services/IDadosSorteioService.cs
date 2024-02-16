@@ -10,10 +10,9 @@ namespace Sorteio.Business.Interfaces.Services
 {
     public interface IDadosSorteioService : IService<DadosSorteio>
     {
-
-        Task Adicionar(DadosSorteio dadosSorteio);
+       /* Task Adicionar(DadosSorteio dadosSorteio);
         Task Atualizar(DadosSorteio dadosSorteio);
-        Task Remover(Guid id);
+        Task Remover(Guid id);*/
 
     }
 }

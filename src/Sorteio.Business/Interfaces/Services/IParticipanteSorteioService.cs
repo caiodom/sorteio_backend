@@ -11,9 +11,5 @@ namespace Sorteio.Business.Interfaces.Services
     public interface IParticipanteSorteioService : IService<ParticipanteSorteio>
     {
 
-        Task Adicionar(ParticipanteSorteio participanteSorteio);
-        Task Atualizar(ParticipanteSorteio participanteSorteio);
-        Task Remover(Guid id);
-
     }
 }

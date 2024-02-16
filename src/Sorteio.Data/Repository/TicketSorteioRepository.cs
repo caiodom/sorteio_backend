@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sorteio.Data.Repository
 {
-    internal class TicketSorteioRepository : Repository<TicketSorteio>, ITicketSorteioRepository
+    public class TicketSorteioRepository : Repository<TicketSorteio>, ITicketSorteioRepository
     {
         public TicketSorteioRepository(SorteioDbContext db) : base(db)
         {

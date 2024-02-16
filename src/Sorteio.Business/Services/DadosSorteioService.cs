@@ -14,50 +14,13 @@ namespace Sorteio.Business.Services
 {
     public class DadosSorteioService : BaseService<DadosSorteio>, IDadosSorteioService
     {
-        private readonly IDadosSorteioRepository _dadosSorteioRepository;
-
+    
         public DadosSorteioService(IDadosSorteioRepository dadosSorteioRepository,INotificador notificador) : base(dadosSorteioRepository,notificador)
         {
-            _dadosSorteioRepository = dadosSorteioRepository;
-        }
-
-
-        public async Task Adicionar(DadosSorteio dadosSorteio)
-        {
-            if (!ExecutarValidacao(new DadosSorteioValidation(), dadosSorteio))
-                return;
-
-            var  dadoExistente=_dadosSorteioRepository.ObterPorId(dadosSorteio.Id);
-
-            if (dadoExistente != null)
-            {
-                Notificar("Já existe um sorteio com o ID informado!");
-                return;
-            }
-
-            await _dadosSorteioRepository.Adicionar(dadosSorteio);
-        }
-
-
-        public async Task Atualizar(DadosSorteio dadosSorteio) 
-        {
-            if (!ExecutarValidacao(new DadosSorteioValidation(), dadosSorteio)) 
-                    return;
-
-            await _dadosSorteioRepository.Atualizar(dadosSorteio);
 
         }
 
-        public async Task Remover(Guid id)
-        {
-            var fornecedor = await _dadosSorteioRepository.ObterPorId(id);
 
-            if (fornecedor == null)
-            {
-                Notificar("Sorteio não existe!");
-                return;
-            }
-            await _dadosSorteioRepository.Remover(id);
-        }
+        
     }
 }

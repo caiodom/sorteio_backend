@@ -10,9 +10,6 @@ namespace Sorteio.Business.Interfaces.Services
 {
     public interface IHistoricoSorteioService : IService<HistoricoSorteio>
     {
-        Task Adicionar(HistoricoSorteio historicoSorteio);
-        Task Atualizar(HistoricoSorteio historicoSorteio);
-        Task Remover(Guid id);
 
     }
 }
