@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sorteio.Business.Models
 {
-    public class DadoSorteio:Entity
+    public class DadosSorteio:Entity
     {
         public string Descricao { get; set; }
         public string Premio { get; set; }

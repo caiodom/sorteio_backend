@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sorteio.Data.Repository
 {
-    public class DadoSorteioRepository : Repository<DadoSorteio>,IDadoSorteioRepository
+    public class DadoSorteioRepository : Repository<DadosSorteio>,IDadosSorteioRepository
     {
         public DadoSorteioRepository(SorteioDbContext db) : base(db)
         {

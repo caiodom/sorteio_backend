@@ -10,12 +10,12 @@ namespace Sorteio.Business.Models
     public class TicketSorteio:Entity
     {
         public Guid IdParticipanteSorteio { get; set; }
-        public Guid IdDadoSorteio { get; set; }
+        public Guid IdDadosSorteio { get; set; }
         public int Numero { get; set; }
 
         /* EF Relation */
         public ParticipanteSorteio ParticipanteSorteio { get; set; }
-        public DadoSorteio DadoSorteio { get; set; }
+        public DadosSorteio DadosSorteio { get; set; }
         public ICollection<HistoricoSorteio> HistoricoSorteios { get; set; }
     }
 }

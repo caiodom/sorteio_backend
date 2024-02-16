@@ -20,7 +20,7 @@ namespace Sorteio.Data.Context
         public DbSet<TicketSorteio> TicketSorteios { get; set; }
         public DbSet<HistoricoSorteio> HistoricoSorteios { get; set; }
         public DbSet<ParticipanteSorteio> ParticipanteSorteios { get; set; }
-        public DbSet<DadoSorteio> DadoSorteios { get; set; }
+        public DbSet<DadosSorteio> DadoSorteios { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace Sorteio.Data.Mappings
 {
-    public class DadoSorteioMapping : IEntityTypeConfiguration<DadoSorteio>
+    public class DadosSorteioMapping : IEntityTypeConfiguration<DadosSorteio>
     {
-        public void Configure(EntityTypeBuilder<DadoSorteio> builder)
+        public void Configure(EntityTypeBuilder<DadosSorteio> builder)
         {
             builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Descricao)
-                    .HasColumnType("varchar(300)");
+                    .HasColumnType("varchar(1000)");
 
             builder.Property(p => p.Premio)
                    .IsRequired()
@@ -39,10 +39,10 @@ namespace Sorteio.Data.Mappings
                    .HasColumnType("bit");
 
             builder.HasMany(p => p.TicketSorteios)
-                   .WithOne(p => p.DadoSorteio)
+                   .WithOne(p => p.DadosSorteio)
                    .HasForeignKey(p => p.IdParticipanteSorteio);
 
-            builder.ToTable("DadoSorteio");
+            builder.ToTable("DadosSorteio");
         }
     }
 }

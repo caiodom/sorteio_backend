@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sorteio.Business.Interfaces.Repository
 {
-    public interface IDadoSorteioRepository : IRepository<DadoSorteio>
+    public interface IDadosSorteioRepository : IRepository<DadosSorteio>
     {
 
 
