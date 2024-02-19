@@ -13,8 +13,8 @@ namespace Sorteio.Data.Context
     {
         public SorteioDbContext(DbContextOptions<SorteioDbContext> options) : base(options)
         {
-             //ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-             //ChangeTracker.AutoDetectChangesEnabled = false;
+             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+             ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
         public DbSet<TicketSorteio> TicketSorteios { get; set; }
@@ -41,12 +41,12 @@ namespace Sorteio.Data.Context
             foreach (var entry in entries)
             {
                 if (entry.State == EntityState.Added)
+                {
                     entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                    entry.Property("Ativo").CurrentValue = true;
+                }
+                    
                 
-
-                if(entry.State== EntityState.Modified)
-                    entry.Property("DataAlteracao").CurrentValue = DateTime.Now;
-                 
             }
 
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);

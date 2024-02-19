@@ -24,7 +24,6 @@ namespace Sorteio.Data.Mappings
                    .HasColumnType("datetime");
 
             builder.Property(p => p.DataAlteracao)
-                   .IsRequired()
                    .HasColumnType("datetime");
 
             builder.Property(p => p.Ativo)

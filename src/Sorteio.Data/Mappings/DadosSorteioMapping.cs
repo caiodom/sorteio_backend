@@ -31,7 +31,6 @@ namespace Sorteio.Data.Mappings
                    .HasColumnType("datetime");
 
             builder.Property(p => p.DataAlteracao)
-                   .IsRequired()
                    .HasColumnType("datetime");
 
             builder.Property(p => p.Ativo)
@@ -40,7 +39,7 @@ namespace Sorteio.Data.Mappings
 
             builder.HasMany(p => p.TicketSorteios)
                    .WithOne(p => p.DadosSorteio)
-                   .HasForeignKey(p => p.IdParticipanteSorteio);
+                   .HasForeignKey(p => p.IdDadosSorteio);
 
             builder.ToTable("DadosSorteio");
         }

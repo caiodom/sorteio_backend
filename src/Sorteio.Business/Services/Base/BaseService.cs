@@ -68,7 +68,7 @@ namespace Sorteio.Business.Services.Base
             if (!ExecutarValidacao(validator, entidade))
                 return;
 
-            var dadoExistente = _repository.ObterPorId(entidade.Id);
+            var dadoExistente = await _repository.ObterPorId(entidade.Id);
 
             if (dadoExistente != null)
             {
@@ -83,6 +83,8 @@ namespace Sorteio.Business.Services.Base
         {
             if (!ExecutarValidacao(validator, entidade))
                 return;
+
+            entidade.DataAlteracao = DateTime.Now;
 
             await _repository.Atualizar(entidade);
         }

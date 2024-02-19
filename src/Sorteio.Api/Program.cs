@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sorteio.Api.Configuracoes;
 using Sorteio.Api.Data;
+using Sorteio.Business.Interfaces.Base;
 using Sorteio.Data.Context;
 using System.Text;
 
@@ -25,6 +26,15 @@ builder.Services.AdicionarConfiguracaoJWT(builder.Configuration);
 
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Total",
+        builder =>
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -44,6 +54,7 @@ var app = builder.Build();
 app.UsarConfiguracaoSwagger();
 
 app.UseHttpsRedirection();
+app.UseCors("Total");
 app.MapControllers();
 
 app.Run();

@@ -29,6 +29,12 @@ namespace Sorteio.Api.Controllers
             return _mapper.Map<IEnumerable<TicketSorteioViewModel>>(await _ticketSorteioService.ObterTodos());
         }
 
+        [HttpGet("sortear")]
+        public  ActionResult<TicketSorteioViewModel> Sortear(Guid idDadosSorteio)
+        {
+            return _mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio));
+        }
+
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<TicketSorteioViewModel>> ObterPorId(Guid id)
         {
