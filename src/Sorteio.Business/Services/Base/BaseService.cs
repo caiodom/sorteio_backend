@@ -76,6 +76,8 @@ namespace Sorteio.Business.Services.Base
                 return;
             }
 
+            entidade.Ativo = true;
+
             await _repository.Adicionar(entidade);
         }
 
