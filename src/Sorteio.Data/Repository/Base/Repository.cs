@@ -25,10 +25,10 @@ namespace Sorteio.Data.Repository.Base
 
 
         public virtual async Task<TEntity> ObterPorId(Guid id)
-                        => await DbSet.FindAsync(id);
+                        => await DbSet.AsNoTracking().FirstOrDefaultAsync(x=>x.Id==id && x.Ativo);
 
         public virtual async Task<List<TEntity>> ObterTodos()
-                        => await DbSet.ToListAsync();
+                        => await DbSet.AsNoTracking().Where(x=>x.Ativo).ToListAsync();
      
 
         public virtual async Task<IEnumerable<TEntity>> Obter(Expression<Func<TEntity, bool>> predicate)
@@ -47,11 +47,11 @@ namespace Sorteio.Data.Repository.Base
             await SaveChanges();
         }
 
-        public virtual async Task Remover(Guid id)
-        {
-            DbSet.Remove(new TEntity { Id = id });
-            await SaveChanges();
-        }
+        //public virtual async Task Remover(Guid id)
+        //{
+        //    DbSet.Remove(new TEntity { Id = id });
+        //    await SaveChanges();
+        //}
 
         public async Task<int> SaveChanges()
             => await Db.SaveChangesAsync();
