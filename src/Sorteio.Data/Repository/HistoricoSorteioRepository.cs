@@ -1,4 +1,5 @@
-﻿using Sorteio.Business.Interfaces.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using Sorteio.Business.Interfaces.Base;
 using Sorteio.Business.Interfaces.Repository;
 using Sorteio.Business.Models;
 using Sorteio.Data.Context;
@@ -14,9 +15,13 @@ namespace Sorteio.Data.Repository
 {
     public class HistoricoSorteioRepository : Repository<HistoricoSorteio>, IHistoricoSorteioRepository
     {
+
         public HistoricoSorteioRepository(SorteioDbContext db) : base(db)
         {
         }
+
+        public IEnumerable<HistoricoSorteio> BuscarComTicketSorteio()
+                            => DbSet.Include(x => x.TicketSorteio);
 
        
     }

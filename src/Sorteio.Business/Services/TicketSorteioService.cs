@@ -37,28 +37,41 @@ namespace Sorteio.Business.Services
         public TicketSorteio Sortear(Guid idDadosSorteio)
         {
 
-            //int contemplado = 0;
+            var historicoSorteio = _historicoSorteioRepository
+                                            .BuscarComTicketSorteio()
+                                            .FirstOrDefault(x => x.TicketSorteio.IdDadosSorteio == idDadosSorteio);
 
-            var tickets = _ticketSorteioRepository.Obter(x => x.IdDadosSorteio == idDadosSorteio).Result;
-
-            var numberMax = tickets.Select(x => x.Numero).Max();
-
-            var contemplado = _random.Next(1, numberMax + 1);
-
-            var sorteado = tickets.FirstOrDefault(x => x.Numero == contemplado);
-
-            if (sorteado == null)
+            if (historicoSorteio == null)
             {
-                Notificar("Não foi possível encontrar o número sorteado");
-                return new TicketSorteio();
+
+                var tickets = _ticketSorteioRepository.Obter(x => x.IdDadosSorteio == idDadosSorteio).Result;
+
+                var numberMax = tickets.Select(x => x.Numero).Max();
+
+                var contemplado = _random.Next(1, numberMax + 1);
+
+                var sorteado = tickets.FirstOrDefault(x => x.Numero == contemplado);
+
+                if (sorteado == null)
+                {
+                    Notificar("Não foi possível encontrar o número sorteado");
+                    return new TicketSorteio();
+                }
+                else
+                {
+                    _historicoSorteioRepository.Adicionar(new HistoricoSorteio { IdTicketSorteio = sorteado.Id, Descricao = $"Sorteio realizado na data {DateTime.Now.ToShortTimeString()} com premiado de numero: {sorteado.Numero}" });
+                }
+                return sorteado;
+
             }
             else
             {
-                 _historicoSorteioRepository.Adicionar(new HistoricoSorteio { IdTicketSorteio=sorteado.Id, Descricao = $"Sorteio realizado na data {DateTime.Now.ToShortTimeString()} com premiado de numero: {sorteado.Numero}" });
+                Notificar("Este sorteio já aconteceu!");
+                return historicoSorteio.TicketSorteio;
             }
 
 
-            return sorteado;
+            
 
         }
 

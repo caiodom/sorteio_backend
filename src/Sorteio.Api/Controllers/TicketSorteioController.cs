@@ -29,10 +29,13 @@ namespace Sorteio.Api.Controllers
             return _mapper.Map<IEnumerable<TicketSorteioViewModel>>(await _ticketSorteioService.ObterTodos());
         }
 
-        [HttpGet("sortear")]
+        [HttpPost("sortear")]
         public  ActionResult<TicketSorteioViewModel> Sortear(Guid idDadosSorteio)
         {
-            return _mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio));
+            if (!ModelState.IsValid) 
+                    return CustomResponse(ModelState);
+
+            return CustomResponse(HttpStatusCode.Created, _mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio)));
         }
 
         [HttpGet("{id:guid}")]

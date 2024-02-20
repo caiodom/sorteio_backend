@@ -10,5 +10,6 @@ namespace Sorteio.Business.Interfaces.Repository
 {
     public interface IHistoricoSorteioRepository : IRepository<HistoricoSorteio>
     {
+        IEnumerable<HistoricoSorteio> BuscarComTicketSorteio();
     }
 }
