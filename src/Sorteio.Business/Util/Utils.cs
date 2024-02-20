@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sorteio.Business
+namespace Sorteio.Business.Util
 {
     public class Utils
     {
@@ -15,7 +15,7 @@ namespace Sorteio.Business
 
             foreach (var s in valor)
             {
-                if(char.IsDigit(s))
+                if (char.IsDigit(s))
                     apenasNumeros += s;
             }
             return apenasNumeros.Trim();

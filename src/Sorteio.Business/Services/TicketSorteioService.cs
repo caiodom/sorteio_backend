@@ -29,7 +29,6 @@ namespace Sorteio.Business.Services
 
         public TicketSorteio Sortear(Guid idDadosSorteio)
         {
-
             var historicoSorteio = _historicoSorteioRepository
                                             .BuscarComTicketSorteio()
                                             .FirstOrDefault(x => x.TicketSorteio.IdDadosSorteio == idDadosSorteio);
