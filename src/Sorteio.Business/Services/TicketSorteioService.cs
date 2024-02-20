@@ -17,20 +17,13 @@ namespace Sorteio.Business.Services
 
         private readonly ITicketSorteioRepository _ticketSorteioRepository;
         private readonly IHistoricoSorteioRepository _historicoSorteioRepository;
-        private readonly IParticipanteSorteioRepository _participanteRepo;
-        private readonly IDadosSorteioRepository _dadoRepo;
-
-        private Random _random;
+        private readonly Random _random;
         public TicketSorteioService(ITicketSorteioRepository ticketSorteioRepository,
                                     IHistoricoSorteioRepository historicoSorteioRepository,
-                                    IParticipanteSorteioRepository participanteRepo,
-                                    IDadosSorteioRepository dadoRepo,
                                     INotificador notificador) : base(ticketSorteioRepository, notificador)
         {
             _ticketSorteioRepository = ticketSorteioRepository;
             _historicoSorteioRepository = historicoSorteioRepository;
-            _participanteRepo = participanteRepo;
-            _dadoRepo=dadoRepo;
             _random = new Random((int)DateTime.Now.Ticks);
         }
 
@@ -73,6 +66,31 @@ namespace Sorteio.Business.Services
 
             
 
+        }
+
+
+        public override Task Adicionar<TV>(TicketSorteio entidade, TV validator)
+        {
+
+            var tickets =  _ticketSorteioRepository.Obter(x => x.IdDadosSorteio == entidade.IdDadosSorteio).Result;
+
+
+            if (tickets.Any(x => x.IdParticipanteSorteio == entidade.IdParticipanteSorteio))
+            {
+                Notificar("Participante já cadastrado para o sorteio");
+                return Task.CompletedTask;
+            }
+
+
+            if (tickets.Any())
+            {
+                var max = tickets.Select(x => x.Numero).Max();
+                entidade.Numero = max + 1;
+            }
+            else
+                entidade.Numero = 1;
+
+            return  base.Adicionar(entidade, validator);
         }
 
         public override Task Atualizar<TV>(TicketSorteio entidade, TV validator)
