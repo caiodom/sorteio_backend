@@ -8,6 +8,8 @@ using System.Security.Claims;
 
 namespace Sorteio.Api.Controllers.Auth
 {
+    [Route("api/auth")]
+    [ApiController]
     public class AuthenticateController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -29,7 +31,7 @@ namespace Sorteio.Api.Controllers.Auth
         [Route("register")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUserViewModel model)
         {
-            var userExists = await _userManager.FindByEmailAsync(model.UserName);
+            var userExists = await _userManager.FindByEmailAsync(model.Email);
 
             if (userExists is not null)
                 return StatusCode(
@@ -41,7 +43,7 @@ namespace Sorteio.Api.Controllers.Auth
             {
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.Email
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -56,33 +58,29 @@ namespace Sorteio.Api.Controllers.Auth
 
             await AddToRoleAsync(user, role);
 
-            return Ok(new ResponseViewModel { Message = "Usuário criado com sucesso!" });
+            var claims = await RetornaClaims(user.Email, model.Password);
+
+            TokenViewModel token;
+            if (claims != null)
+                token = GetToken(claims);
+            else
+                return Unauthorized();
+
+            return Ok(new ResponseViewModel { Message = "Usuário criado com sucesso!", Data = token });
         }
 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var authClaims=await RetornaClaims(model.UserName, model.Password);
 
-            if (user is not null && await _userManager.CheckPasswordAsync(user, model.Password))
-            {
-
-                var authClaims = new List<Claim>
-            {
-                new (ClaimTypes.Name, user.UserName),
-                new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-                var userRoles = await _userManager.GetRolesAsync(user);
-
-                foreach (var userRole in userRoles)
-                    authClaims.Add(new(ClaimTypes.Role, userRole));
-
+            TokenViewModel token;
+            if (authClaims != null)
                 return Ok(new ResponseViewModel { Data = GetToken(authClaims) });
-            }
+            else
+                return Unauthorized();
 
-            return Unauthorized();
         }
 
         private TokenViewModel GetToken(List<Claim> authClaims)
@@ -111,6 +109,29 @@ namespace Sorteio.Api.Controllers.Auth
                 await _roleManager.CreateAsync(new(role));
 
             await _userManager.AddToRoleAsync(user, role);
+        }
+
+
+        private async Task<List<Claim>> RetornaClaims(string userLogin, string password)
+        {
+
+            var authClaims = new List<Claim>();
+            var user = await _userManager.FindByNameAsync(userLogin);
+
+            if (user is not null && await _userManager.CheckPasswordAsync(user, password))
+            {
+
+                authClaims.Add(new(ClaimTypes.Name, user.UserName));
+                authClaims.Add(new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                foreach (var userRole in userRoles)
+                    authClaims.Add(new(ClaimTypes.Role, userRole));
+            }
+
+            return authClaims;
         }
     }
 }
