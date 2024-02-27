@@ -1,5 +1,6 @@
 ﻿
 
+using Sorteio.Api.Extensoes;
 using Sorteio.Business.Interfaces;
 using Sorteio.Business.Interfaces.Repository;
 using Sorteio.Business.Interfaces.Services;
@@ -30,6 +31,8 @@ namespace Sorteio.Api.Configuracoes
             services.AddScoped<ITicketSorteioService, TicketSorteioService>();
 
             services.AddScoped<INotificador, Notificador>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUser, AspNetUser>();
 
             return services;
         }

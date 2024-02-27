@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Sorteio.Api.Auth;
-using Sorteio.Api.Models.Auth;
+using Sorteio.Api.Models.Auth.Deprecated;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Sorteio.Api.Controllers.Auth
+namespace Sorteio.Api.Controllers.Auth.Deprecated
 {
     [Route("api/auth")]
     [ApiController]
@@ -73,7 +73,7 @@ namespace Sorteio.Api.Controllers.Auth
         [Route("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginViewModel model)
         {
-            var authClaims=await RetornaClaims(model.UserName, model.Password);
+            var authClaims = await RetornaClaims(model.UserName, model.Password);
 
             TokenViewModel token;
             if (authClaims != null)

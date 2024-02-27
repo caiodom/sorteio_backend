@@ -17,7 +17,8 @@ namespace Sorteio.Api.Controllers
         private readonly IMapper _mapper;
         public HistoricoSorteioController(IHistoricoSorteioService historicoSorteioService,
                                       IMapper mapper,
-                                      INotificador notificador) : base(notificador)
+                                      INotificador notificador,
+                                      IUser user) : base(notificador, user)
         {
             _mapper = mapper;
             _historicoSorteioService = historicoSorteioService;
@@ -46,7 +47,7 @@ namespace Sorteio.Api.Controllers
 
             await _historicoSorteioService.Adicionar(_mapper.Map<HistoricoSorteio>(historicoSorteioViewModel), new HistoricoSorteioValidation());
 
-            return CustomResponse(HttpStatusCode.Created, historicoSorteioViewModel);
+            return CustomResponse(historicoSorteioViewModel);
         }
 
         [HttpPut("{id:guid}")]
@@ -64,7 +65,7 @@ namespace Sorteio.Api.Controllers
 
             await _historicoSorteioService.Atualizar(_mapper.Map<HistoricoSorteio>(historicoSorteioViewModel), new HistoricoSorteioValidation());
 
-            return CustomResponse(HttpStatusCode.NoContent);
+            return CustomResponse(historicoSorteioViewModel);
         }
 
         [HttpDelete("{id:guid}")]

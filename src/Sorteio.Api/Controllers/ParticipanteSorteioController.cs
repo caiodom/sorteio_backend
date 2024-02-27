@@ -17,7 +17,8 @@ namespace Sorteio.Api.Controllers
         private readonly IMapper _mapper;
         public ParticipanteSorteioController(IParticipanteSorteioService participanteSorteioService,
                                       IMapper mapper,
-                                      INotificador notificador) : base(notificador)
+                                      INotificador notificador,
+                                      IUser user) : base(notificador, user)
         {
             _mapper = mapper;
             _participanteSorteioService = participanteSorteioService;
@@ -46,7 +47,7 @@ namespace Sorteio.Api.Controllers
 
             await _participanteSorteioService.Adicionar(_mapper.Map<ParticipanteSorteio>(participanteSorteioViewModel), new ParticipanteSorteioValidation());
 
-            return CustomResponse(HttpStatusCode.Created, participanteSorteioViewModel);
+            return CustomResponse(participanteSorteioViewModel);
         }
 
         [HttpPut("{id:guid}")]

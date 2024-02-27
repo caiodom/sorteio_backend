@@ -11,7 +11,7 @@ using Sorteio.Api.Data;
 
 namespace Sorteio.Api.Migrations
 {
-    [DbContext(typeof(ApplicationContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240215184334_Auth")]
     partial class Auth
     {

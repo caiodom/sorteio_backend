@@ -1,2 +1,2 @@
-Add-Migration Auth -Context ApplicationContext
-Update-Database -Context ApplicationContext
+Add-Migration Auth -Context ApplicationDbContext
+Update-Database -Context ApplicationDbContext

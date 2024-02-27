@@ -1,4 +1,4 @@
-﻿namespace Sorteio.Api.Models.Auth
+﻿namespace Sorteio.Api.Models.Auth.Deprecated
 {
     public class ResponseViewModel
     {

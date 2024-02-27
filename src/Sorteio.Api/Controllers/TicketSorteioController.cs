@@ -17,7 +17,8 @@ namespace Sorteio.Api.Controllers
         private readonly IMapper _mapper;
         public TicketSorteioController(ITicketSorteioService ticketSorteioService,
                                       IMapper mapper,
-                                      INotificador notificador) : base(notificador)
+                                      INotificador notificador,
+                                      IUser user) : base(notificador,user)
         {
             _mapper = mapper;
             _ticketSorteioService = ticketSorteioService;
@@ -35,7 +36,7 @@ namespace Sorteio.Api.Controllers
             if (!ModelState.IsValid) 
                     return CustomResponse(ModelState);
 
-            return CustomResponse(HttpStatusCode.Created, _mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio)));
+            return CustomResponse(_mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio)));
         }
 
         [HttpGet("{id:guid}")]
@@ -55,7 +56,7 @@ namespace Sorteio.Api.Controllers
 
             await _ticketSorteioService.Adicionar(_mapper.Map<TicketSorteio>(ticketSorteioViewModel), new TicketSorteioValidation());
 
-            return CustomResponse(HttpStatusCode.Created, ticketSorteioViewModel);
+            return CustomResponse(ticketSorteioViewModel);
         }
 
         [HttpPut("{id:guid}")]

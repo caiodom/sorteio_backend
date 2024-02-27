@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sorteio.Api.Configuracoes;
+using Sorteio.Api.Configuracoes.Deprecated;
 using Sorteio.Api.Data;
 using Sorteio.Business.Interfaces.Base;
 using Sorteio.Data.Context;
@@ -13,14 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //Auth services
-builder.Services.AddDbContext<ApplicationContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 
+//Deprecated
+//builder.Services.AdicionarConfiguracaoJWT(builder.Configuration);
 
-builder.Services.AdicionarConfiguracaoJWT(builder.Configuration);
+builder.Services.AddIdentityConfiguration(builder.Configuration);
 
 // Add services to the container.
 

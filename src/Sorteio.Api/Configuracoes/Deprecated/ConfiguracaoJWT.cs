@@ -6,7 +6,7 @@ using Sorteio.Api.Data;
 using System.Diagnostics;
 using System.Text;
 
-namespace Sorteio.Api.Configuracoes
+namespace Sorteio.Api.Configuracoes.Deprecated
 {
     public static class ConfiguracaoJWT
     {
@@ -16,7 +16,7 @@ namespace Sorteio.Api.Configuracoes
 
             //AddIdentity
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
 

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Sorteio.Api.Data
 {
-    public class ApplicationContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     }
 }

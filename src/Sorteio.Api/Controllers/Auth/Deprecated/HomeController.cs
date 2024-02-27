@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sorteio.Api.Auth;
 
-namespace Sorteio.Api.Controllers.Auth
+namespace Sorteio.Api.Controllers.Auth.Deprecated
 {
     [Route("api/[controller]")]
     [ApiController]
