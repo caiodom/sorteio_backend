@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sorteio.Api.Configuracoes;
-using Sorteio.Api.Configuracoes.Deprecated;
 using Sorteio.Api.Data;
 using Sorteio.Business.Interfaces.Base;
 using Sorteio.Data.Context;
