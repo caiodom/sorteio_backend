@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Sorteio.Api.Controllers.Base;
+using Sorteio.Api.Extensoes;
 using Sorteio.Api.Models;
 using Sorteio.Business.Interfaces;
 using Sorteio.Business.Interfaces.Services;
@@ -41,6 +42,7 @@ namespace Sorteio.Api.Controllers
         }
 
         [HttpPost]
+        [ClaimsAuthorize("DadosSorteio", "Adicionar")]
         public async Task<ActionResult<DadosSorteioViewModel>> Adicionar(DadosSorteioViewModel dadoSorteioViewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
@@ -50,6 +52,7 @@ namespace Sorteio.Api.Controllers
             return CustomResponse(dadoSorteioViewModel);
         }
 
+        [ClaimsAuthorize("DadosSorteio", "Atualizar")]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, DadosSorteioViewModel dadoSorteioViewModel)
         {
@@ -68,6 +71,7 @@ namespace Sorteio.Api.Controllers
             return CustomResponse(HttpStatusCode.NoContent);
         }
 
+        [ClaimsAuthorize("DadosSorteio", "Excluir")]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<DadosSorteioViewModel>> Excluir(Guid id)
         {

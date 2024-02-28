@@ -7,6 +7,7 @@ using Sorteio.Business.Interfaces;
 using Sorteio.Business.Models.Validations;
 using Sorteio.Business.Models;
 using System.Net;
+using Sorteio.Api.Extensoes;
 
 namespace Sorteio.Api.Controllers
 {
@@ -49,6 +50,7 @@ namespace Sorteio.Api.Controllers
             return ticketSorteioViewModel;
         }
 
+        [ClaimsAuthorize("TicketSorteio", "Adicionar")]
         [HttpPost]
         public async Task<ActionResult<TicketSorteioViewModel>> Adicionar(TicketSorteioViewModel ticketSorteioViewModel)
         {
@@ -59,6 +61,7 @@ namespace Sorteio.Api.Controllers
             return CustomResponse(ticketSorteioViewModel);
         }
 
+        [ClaimsAuthorize("TicketSorteio", "Atualizar")]
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, TicketSorteioViewModel ticketSorteioViewModel)
         {
@@ -77,6 +80,7 @@ namespace Sorteio.Api.Controllers
             return CustomResponse(HttpStatusCode.NoContent);
         }
 
+        [ClaimsAuthorize("TicketSorteio", "Excluir")]
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<TicketSorteioViewModel>> Excluir(Guid id)
         {
