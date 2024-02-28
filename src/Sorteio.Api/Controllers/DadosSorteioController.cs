@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Sorteio.Api.Controllers
 {
-    [Route("api/sorteio")]
+    [Route("api/dados-sorteio")]
     public class DadosSorteioController : MainController
     {
         private readonly IDadosSorteioService _dadosSorteioService;

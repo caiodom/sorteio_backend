@@ -11,7 +11,7 @@ using Sorteio.Api.Extensoes;
 
 namespace Sorteio.Api.Controllers
 {
-    [Route("api/ticket")]
+    [Route("api/ticket-sorteio")]
     public class TicketSorteioController : MainController
     {
         private readonly ITicketSorteioService _ticketSorteioService;

@@ -11,7 +11,7 @@ using Sorteio.Api.Extensoes;
 
 namespace Sorteio.Api.Controllers
 {
-    [Route("api/historico")]
+    [Route("api/historico-sorteio")]
     public class HistoricoSorteioController : MainController
     {
         private readonly IHistoricoSorteioService _historicoSorteioService;

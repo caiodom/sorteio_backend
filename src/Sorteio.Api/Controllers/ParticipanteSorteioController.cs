@@ -11,7 +11,7 @@ using Sorteio.Api.Extensoes;
 
 namespace Sorteio.Api.Controllers
 {
-    [Route("api/participante")]
+    [Route("api/participante-sorteio")]
     public class ParticipanteSorteioController : MainController
     {
         private readonly IParticipanteSorteioService _participanteSorteioService;
