@@ -14,13 +14,31 @@ namespace Sorteio.Business.Services
 {
     public class DadosSorteioService : BaseService<DadosSorteio>, IDadosSorteioService
     {
-    
+
+        private readonly IDadosSorteioRepository _dadosSorteioRepository;
         public DadosSorteioService(IDadosSorteioRepository dadosSorteioRepository,INotificador notificador) : base(dadosSorteioRepository,notificador)
         {
+            _dadosSorteioRepository = dadosSorteioRepository;
+        }
 
+        public override Task Atualizar<TV>(DadosSorteio entidade, TV validator)
+        {
+            var dadoAntigo = _dadosSorteioRepository.ObterPorId(entidade.Id).Result;
+
+            var dadoUpdate = new DadosSorteio
+            {
+                Id = dadoAntigo.Id,
+                Descricao = entidade.Descricao,
+                Premio = entidade.Premio,
+                ValorPremio =entidade.ValorPremio,
+                DataAlteracao = DateTime.Now,
+                DataCadastro = dadoAntigo.DataCadastro,
+                Ativo = true
+            };
+
+            return base.Atualizar(dadoUpdate, validator);
         }
 
 
-        
     }
 }
