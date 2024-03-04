@@ -20,13 +20,22 @@ namespace Sorteio.Data.Mappings
                    .IsRequired()
                    .HasColumnType("varchar(100)");
 
-            builder.Property(p => p.Endereco)
+            builder.Property(p => p.Logradouro)
                    .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Numero)
+                    .HasColumnType("integer");
+
+            builder.Property(p => p.Complemento)
+                   .HasColumnType("varchar(200)");
 
             builder.Property(p => p.Estado)
                    .HasColumnType("varchar(2)");
 
             builder.Property(p => p.Cidade)
+                   .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Bairro)
                    .HasColumnType("varchar(100)");
 
             builder.Property(p => p.Email)

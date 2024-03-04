@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sorteio.Data.Context;
 
@@ -11,9 +12,11 @@ using Sorteio.Data.Context;
 namespace Sorteio.Data.Migrations
 {
     [DbContext(typeof(SorteioDbContext))]
-    partial class SorteioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240304141007_ColumnNamesNullables")]
+    partial class ColumnNamesNullables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,9 +107,6 @@ namespace Sorteio.Data.Migrations
                     b.Property<string>("Cidade")
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Complemento")
-                        .HasColumnType("varchar(200)");
-
                     b.Property<DateTime?>("DataAlteracao")
                         .HasColumnType("datetime");
 
@@ -126,9 +126,6 @@ namespace Sorteio.Data.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
-
-                    b.Property<int?>("Numero")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
