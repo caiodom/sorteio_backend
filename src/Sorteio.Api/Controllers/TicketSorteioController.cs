@@ -31,6 +31,27 @@ namespace Sorteio.Api.Controllers
             return _mapper.Map<IEnumerable<TicketSorteioViewModel>>(await _ticketSorteioService.ObterTodos());
         }
 
+        [HttpGet("ListarTicketsCompletos")]
+        public IEnumerable<TicketSorteioViewModel> ListarTicketsCompletos()
+        {
+            var ticketsCompletos = _ticketSorteioService
+                                            .ListarTicketsCompletos()
+                                            .Select(x => new TicketSorteioViewModel
+                                            {
+                                                Id = x.Id,
+                                                IdDadosSorteio = x.IdDadosSorteio,
+                                                IdParticipanteSorteio = x.IdParticipanteSorteio,
+                                                DescricaoSorteio = x.DadosSorteio.Descricao,
+                                                NomeParticipanteSorteio=x.ParticipanteSorteio.Nome,
+                                                Numero=x.Numero
+                                                
+                                            });
+
+
+
+            return ticketsCompletos;
+        }
+
         [HttpPost("sortear")]
         public  ActionResult<TicketSorteioViewModel> Sortear(Guid idDadosSorteio)
         {

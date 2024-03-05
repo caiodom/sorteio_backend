@@ -14,5 +14,8 @@ namespace Sorteio.Api.Models
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public int Numero { get; set; }
+
+        public string? NomeParticipanteSorteio { get; set; }
+        public string? DescricaoSorteio { get; set; }
     }
 }

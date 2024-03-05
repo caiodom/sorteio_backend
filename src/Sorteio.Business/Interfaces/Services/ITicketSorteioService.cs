@@ -12,5 +12,6 @@ namespace Sorteio.Business.Interfaces.Services
     public interface ITicketSorteioService : IService<TicketSorteio>
     {
         TicketSorteio Sortear(Guid idDadosSorteio);
+        IEnumerable<TicketSorteio> ListarTicketsCompletos();
     }
 }

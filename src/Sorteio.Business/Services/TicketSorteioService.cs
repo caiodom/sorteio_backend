@@ -68,6 +68,12 @@ namespace Sorteio.Business.Services
         }
 
 
+        public IEnumerable<TicketSorteio> ListarTicketsCompletos()
+        {
+            return _ticketSorteioRepository.ListarTicketsCompletos();
+        }
+
+
         public override Task Adicionar<TV>(TicketSorteio entidade, TV validator)
         {
 

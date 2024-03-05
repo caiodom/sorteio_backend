@@ -10,5 +10,6 @@ namespace Sorteio.Business.Interfaces.Repository
 {
     public interface ITicketSorteioRepository:IRepository<TicketSorteio>
     {
+        IEnumerable<TicketSorteio> ListarTicketsCompletos();
     }
 }
