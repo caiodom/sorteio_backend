@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Components;
+
 using Microsoft.AspNetCore.Mvc;
 using Sorteio.Api.Controllers.Base;
 using Sorteio.Api.Models;
@@ -29,7 +29,25 @@ namespace Sorteio.Api.Controllers
             if (!ModelState.IsValid)
                 return CustomResponse(ModelState);
 
-            return CustomResponse(_mapper.Map<TicketSorteioViewModel>(_ticketSorteioService.Sortear(idDadosSorteio)));
+
+            var x = _ticketSorteioService.Sortear(idDadosSorteio);
+
+            if (x == null)
+                return BadRequest();
+
+            var dto = new TicketSorteioViewModel
+            {
+                Id = x.Id,
+                IdDadosSorteio = x.IdDadosSorteio,
+                IdParticipanteSorteio = x.IdParticipanteSorteio,
+                DescricaoSorteio = x.DadosSorteio.Descricao,
+                NomeParticipanteSorteio = x.ParticipanteSorteio.Nome,
+                Numero = x.Numero
+
+            };
+
+
+            return CustomResponse(dto);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Sorteio.Business.Services
             if (historicoSorteio == null)
             {
 
-                var tickets = _ticketSorteioRepository.Obter(x => x.IdDadosSorteio == idDadosSorteio).Result;
+                var tickets = _ticketSorteioRepository.ListarTicketsCompletos(x => x.IdDadosSorteio == idDadosSorteio);
 
                 var numberMax = tickets.Select(x => x.Numero).Max();
 
@@ -59,7 +59,7 @@ namespace Sorteio.Business.Services
             else
             {
                 Notificar("Este sorteio já aconteceu!");
-                return historicoSorteio.TicketSorteio;
+                return null;
             }
 
 
