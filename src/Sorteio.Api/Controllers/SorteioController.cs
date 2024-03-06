@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Sorteio.Api.Controllers.Base;
+using Sorteio.Api.Extensoes;
 using Sorteio.Api.Models;
 using Sorteio.Business.Interfaces;
 using Sorteio.Business.Interfaces.Services;
@@ -24,6 +25,7 @@ namespace Sorteio.Api.Controllers
         }
 
         [HttpPost("sortear")]
+        [ClaimsAuthorize("TicketSorteio", "Adicionar")]
         public ActionResult<TicketSorteioViewModel> Sortear(Guid idDadosSorteio)
         {
             if (!ModelState.IsValid)
